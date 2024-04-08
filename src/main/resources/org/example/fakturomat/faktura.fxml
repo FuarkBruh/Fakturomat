@@ -11,7 +11,7 @@
     <Text layoutX="53.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numer faktury" />
     <TextField layoutX="53.0" layoutY="58.0" />
 
-    <!-- Data wystawieniaa -->
+    <!-- Data wystawienia -->
     <Text layoutX="266.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data wystawienia" />
     <DatePicker layoutX="266.0" layoutY="58.0" />
 
