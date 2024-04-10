@@ -8,10 +8,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("faktura.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("faktura.fxml"));
         AnchorPane root = fxmlLoader.load();
         // Ustawienie koloru tła dla sceny
         root.setStyle("-fx-background-color: lightgrey;");
