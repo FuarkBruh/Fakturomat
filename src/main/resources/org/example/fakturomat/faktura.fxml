@@ -7,34 +7,38 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="638.0" prefWidth="700.0" style="-fx-background-color: lightgrey;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">  <children>
+<?import javafx.scene.control.Button?>
+<AnchorPane prefHeight="638.0" prefWidth="700.0" style="-fx-background-color: lightgrey;"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.fakturomat.Controller">
+  <children>
     <!-- Numer faktury -->
     <Text layoutX="50.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numer faktury" />
-    <TextField layoutX="50.0" layoutY="104.0" />
+    <TextField layoutX="50.0" layoutY="104.0" fx:id="numerFaktury" />
 
     <!-- Data wystawienia -->
     <Text layoutX="262.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data wystawienia" />
-    <DatePicker layoutX="262.0" layoutY="104.0" />
+    <DatePicker layoutX="262.0" layoutY="104.0" fx:id="dataWystawienia" />
 
     <!-- Data sprzedaży -->
     <Text layoutX="472.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data sprzedaży" />
-    <DatePicker layoutX="472.0" layoutY="104.0" />
+    <DatePicker layoutX="472.0" layoutY="104.0" fx:id="dataSprzedazy"/>
 
     <!-- Nabywca -->
     <Text layoutX="50.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nabywca" />
-    <TextField layoutX="50.0" layoutY="164.0" />
+    <TextField layoutX="50.0" layoutY="164.0" fx:id="nabywca"/>
 
     <!-- NIP -->
     <Text layoutX="50.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NIP" />
-    <TextField layoutX="50.0" layoutY="224.0" />
+    <TextField layoutX="50.0" layoutY="224.0" fx:id="nip"/>
 
     <!-- Ulica jakas-->
     <Text layoutX="50.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ulica" />
-    <TextField layoutX="50.0" layoutY="284.0" />
+    <TextField layoutX="50.0" layoutY="284.0" fx:id="ulica"/>
 
     <!-- Miasto -->
     <Text layoutX="50.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Miasto" />
-    <TextField layoutX="50.0" layoutY="344.0" />
+    <TextField layoutX="50.0" layoutY="344.0" fx:id="miasto"/>
 
     <!--Text główny-->
       <Text layoutX="295.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fakturomat">
@@ -46,6 +50,9 @@
     <!--Wybór osoby wystawiającej-->
       <ComboBox layoutX="477.0" layoutY="344.0" prefHeight="26.0" prefWidth="175.0" />
       <Text layoutX="477.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Osoba wystawiająca" />
+
+    <Button layoutX="262.0" layoutY="400.0" mnemonicParsing="false" text="Generuj PDF" onAction="#onGenerujButtonClick" />
+
 
 </children>
 </AnchorPane>
