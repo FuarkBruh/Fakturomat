@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- Deklaracja XML -->
+
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
@@ -7,52 +10,91 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.Button?>
-<AnchorPane prefHeight="638.0" prefWidth="700.0" style="-fx-background-color: lightgrey;"
-            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.example.fakturomat.Controller">
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<AnchorPane prefHeight="638.0" prefWidth="700.0" style="-fx-background-color: lightgrey;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.fakturomat.Controller">
+  <!-- Korzeń kontenera AnchorPane -->
+
   <children>
     <!-- Numer faktury -->
     <Text layoutX="50.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numer faktury" />
-    <TextField layoutX="50.0" layoutY="104.0" fx:id="numerFaktury" />
+    <TextField fx:id="numerFaktury" layoutX="50.0" layoutY="104.0" />
 
     <!-- Data wystawienia -->
     <Text layoutX="262.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data wystawienia" />
-    <DatePicker layoutX="262.0" layoutY="104.0" fx:id="dataWystawienia" />
+    <DatePicker fx:id="dataWystawienia" layoutX="262.0" layoutY="104.0" />
 
     <!-- Data sprzedaży -->
     <Text layoutX="472.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data sprzedaży" />
-    <DatePicker layoutX="472.0" layoutY="104.0" fx:id="dataSprzedazy"/>
+    <DatePicker fx:id="dataSprzedazy" layoutX="472.0" layoutY="104.0" />
 
     <!-- Nabywca -->
     <Text layoutX="50.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nabywca" />
-    <TextField layoutX="50.0" layoutY="164.0" fx:id="nabywca"/>
+    <TextField fx:id="nabywca" layoutX="50.0" layoutY="164.0" />
 
     <!-- NIP -->
     <Text layoutX="50.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NIP" />
-    <TextField layoutX="50.0" layoutY="224.0" fx:id="nip"/>
+    <TextField fx:id="nip" layoutX="50.0" layoutY="224.0" />
 
-    <!-- Ulica jakas-->
+    <!-- Ulica -->
     <Text layoutX="50.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ulica" />
-    <TextField layoutX="50.0" layoutY="284.0" fx:id="ulica"/>
+    <TextField fx:id="ulica" layoutX="50.0" layoutY="284.0" />
 
     <!-- Miasto -->
     <Text layoutX="50.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Miasto" />
-    <TextField layoutX="50.0" layoutY="344.0" fx:id="miasto"/>
+    <TextField fx:id="miasto" layoutX="50.0" layoutY="344.0" />
 
-    <!--Text główny-->
-      <Text layoutX="295.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fakturomat">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Text>
+    <!-- Tytuł -->
+    <Text layoutX="295.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fakturomat">
+      <font>
+        <Font size="22.0" />
+      </font>
+    </Text>
 
-    <!--Wybór osoby wystawiającej-->
-      <ComboBox layoutX="477.0" layoutY="344.0" prefHeight="26.0" prefWidth="175.0" />
-      <Text layoutX="477.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Osoba wystawiająca" />
+    <!-- Wybór osoby wystawiającej -->
+    <ComboBox fx:id="osobaWystawiajaca" layoutX="477.0" layoutY="344.0" prefHeight="26.0" prefWidth="175.0">
+      <items>
+        <!-- Tutaj się dodaje osoby, które wystawiają faktury-->
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="Janina Kowalska" />
+          <String fx:value="Zdzisława Wąsata" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <Text layoutX="477.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Osoba wystawiająca" />
 
-    <Button layoutX="262.0" layoutY="400.0" mnemonicParsing="false" text="Generuj PDF" onAction="#onGenerujButtonClick" />
+
+    <!-- Przycisk generacji faktury do PDF -->
+    <Button layoutX="262.0" layoutY="400.0" mnemonicParsing="false" onAction="#onGenerujButtonClick" text="Generuj PDF" />
+
+    <!-- Nazwa towaru -->
+    <Text layoutX="58.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa towaru" />
+    <TextField fx:id="nazwaTowaru" layoutX="52.0" layoutY="472.0" prefHeight="26.0" prefWidth="249.0" />
+
+    <!-- Jednostka miary -->
+    <ComboBox fx:id="jednostkaMiary" layoutX="301.0" layoutY="472.0" prefHeight="26.0" prefWidth="85.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="szt." />
+          <String fx:value="kg" />
+          <String fx:value="g" />
+        </FXCollections>
+      </items>
+    </ComboBox>
+    <Text layoutX="301.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jednostka miary" />
 
 
-</children>
+    <!-- Ilość -->
+    <Text layoutX="399.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ilość" />
+    <TextField fx:id="ilosc" layoutX="387.0" layoutY="472.0" prefHeight="26.0" prefWidth="48.0" />
+
+    <!-- Cena netto -->
+    <Text layoutX="437.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cena netto" />
+    <TextField fx:id="cenaNetto" layoutX="435.0" layoutY="472.0" prefHeight="26.0" prefWidth="62.0" />
+
+    <!-- Stawka VAT -->
+    <Text layoutX="509.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stawka VAT" />
+    <ComboBox fx:id="stawkaVAT" layoutX="495.0" layoutY="472.0" prefHeight="26.0" prefWidth="85.0" />
+
+  </children>
 </AnchorPane>
