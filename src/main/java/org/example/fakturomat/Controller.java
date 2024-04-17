@@ -43,31 +43,40 @@ public class Controller {
     @FXML
     protected void dodajPozycje() {
         // Tworzenie nowych kontrolki i nadawanie im unikatowych fx:id
-        TextField nazwaTowaru = new TextField();
-        nazwaTowaru.setId("nazwaTowaru_" + UUID.randomUUID().toString());
+        TextField nowaNazwaTowaru = new TextField();
+        nowaNazwaTowaru.setPrefHeight(nazwaTowaru.getPrefHeight());
+        nowaNazwaTowaru.setPrefWidth(nazwaTowaru.getPrefWidth());
+        nowaNazwaTowaru.setId("nazwaTowaru_" + UUID.randomUUID());
 
-        ComboBox<String> jednostkaMiary = new ComboBox<>();
-        jednostkaMiary.setId("jednostkaMiary_" + UUID.randomUUID().toString());
+        ComboBox<String> nowaJednostkaMiary = new ComboBox<>();
+        nowaJednostkaMiary.setPrefHeight(jednostkaMiary.getPrefHeight());
+        nowaJednostkaMiary.setPrefWidth(jednostkaMiary.getPrefWidth());
+        nowaJednostkaMiary.setItems(jednostkaMiary.getItems());
+        nowaJednostkaMiary.setId("jednostkaMiary_" + UUID.randomUUID());
 
-        TextField ilosc = new TextField();
-        ilosc.setId("ilosc_" + UUID.randomUUID().toString());
+        TextField nowaIlosc = new TextField();
+        nowaIlosc.setPrefHeight(ilosc.getPrefHeight());
+        nowaIlosc.setPrefWidth(ilosc.getPrefWidth());
+        nowaIlosc.setId("ilosc_" + UUID.randomUUID());
 
-        TextField cenaNetto = new TextField();
-        cenaNetto.setId("cenaNetto_" + UUID.randomUUID().toString());
+        TextField nowaCenaNetto = new TextField();
+        nowaCenaNetto.setPrefHeight(cenaNetto.getPrefHeight());
+        nowaCenaNetto.setPrefWidth(cenaNetto.getPrefWidth());
+        nowaCenaNetto.setId("cenaNetto_" + UUID.randomUUID());
 
-        ComboBox<String> stawkaVAT = new ComboBox<>();
-        stawkaVAT.setId("stawkaVAT_" + UUID.randomUUID().toString());
+        ComboBox<String> nowaStawkaVAT = new ComboBox<>();
+        nowaStawkaVAT.setPrefHeight(stawkaVAT.getPrefHeight());
+        nowaStawkaVAT.setPrefWidth(stawkaVAT.getPrefWidth());
+        nowaStawkaVAT.setId("stawkaVAT_" + UUID.randomUUID());
 
         // Tworzenie nowego HBox dla kolejnej pozycji towarowej
         HBox nowyPoziomyHBox = new HBox();
-        nowyPoziomyHBox.getChildren().addAll(nazwaTowaru, jednostkaMiary, ilosc, cenaNetto, stawkaVAT);
+        nowyPoziomyHBox.setSpacing(10.0);
+        nowyPoziomyHBox.getChildren().addAll(nowaNazwaTowaru, nowaJednostkaMiary, nowaIlosc, nowaCenaNetto, nowaStawkaVAT);
 
         // Dodanie HBox do VBox
         poziomyVBox.getChildren().add(nowyPoziomyHBox);
     }
-
-
-
 
     @FXML
     protected void onGenerujButtonClick() {
