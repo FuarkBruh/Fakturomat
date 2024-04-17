@@ -3,6 +3,7 @@ package org.example.fakturomat;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -12,6 +13,11 @@ import java.util.List;
 import java.util.UUID;
 
 public class Controller {
+    public ComboBox statusPlatnosci;
+    public DatePicker terminPlatnosci;
+    public ComboBox sposobPlatnosci;
+    public TextArea uwagi;
+    public DatePicker dataPlatnosci;
     @FXML
     private TextField numerFaktury;
     @FXML
@@ -40,8 +46,6 @@ public class Controller {
     private ComboBox<String> stawkaVAT;
     @FXML
     private VBox poziomyVBox;
-    @FXML
-    private HBox poziomyHBox;
     private List<TextField> listaNazwaTowaru = new ArrayList<>();
     private List<ComboBox<String>> listaJednostkaMiary = new ArrayList<>();
     private List<TextField> listaIlosc = new ArrayList<>();
@@ -94,8 +98,11 @@ public class Controller {
 
     @FXML
     protected void onGenerujButtonClick() {
-        PDFGenerator.generatePDF(numerFaktury, dataWystawienia, dataSprzedazy, nabywca, nip, ulica, miasto,
-                osobaWystawiajaca, nazwaTowaru, jednostkaMiary, ilosc, cenaNetto, stawkaVAT, listaNazwaTowaru,
+        PDFGenerator.generatePDF(
+                numerFaktury, dataWystawienia, dataSprzedazy, nabywca, nip, ulica, miasto, osobaWystawiajaca,
+                nazwaTowaru, jednostkaMiary, ilosc, cenaNetto, stawkaVAT, statusPlatnosci, terminPlatnosci,
+                sposobPlatnosci, uwagi, dataPlatnosci, listaNazwaTowaru,
                 listaIlosc, listaJednostkaMiary, listaCenaNetto, listaStawkaVAT);
     }
+
 }

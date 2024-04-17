@@ -2,6 +2,7 @@ package org.example.fakturomat;
 
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -16,12 +17,11 @@ import java.util.List;
 public class PDFGenerator {
     public static void generatePDF(TextField numerFaktury, DatePicker dataWystawienia, DatePicker dataSprzedazy,
                                    TextField nabywca, TextField nip, TextField ulica, TextField miasto,
-                                   ComboBox<String> osobaWystawiajaca,
-                                   TextField nazwaTowaru, ComboBox<String> jednostkaMiary,
+                                   ComboBox<String> osobaWystawiajaca, TextField nazwaTowaru, ComboBox<String> jednostkaMiary,
                                    TextField ilosc, TextField cenaNetto, ComboBox<String> stawkaVAT,
-                                   List<TextField> listaNazwaTowaru, List<TextField> listaIlosc,
-                                   List<ComboBox<String>> listaJednostkaMiary, List<TextField> listaCenaNetto,
-                                   List<ComboBox<String>> listaStawkaVAT) {
+                                   ComboBox<String> statusPlatnosci, DatePicker terminPlatnosci, ComboBox<String> sposobPlatnosci,
+                                   TextArea uwagi, DatePicker dataPlatnosci, List<TextField> listaNazwaTowaru, List<TextField> listaIlosc,
+                                   List<ComboBox<String>> listaJednostkaMiary, List<TextField> listaCenaNetto, List<ComboBox<String>> listaStawkaVAT) {
         try {
             PDDocument document = new PDDocument();
             PDPage page = new PDPage();
@@ -29,8 +29,41 @@ public class PDFGenerator {
 
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
             contentStream.setFont(PDType0Font.load(document, new File("TimesNewRoman.ttf")), 12);
+
+            float xStart = 50;
+            float yStart = 700;
+            float width = 1000;
+            float height = 40;
+
+            // Górna linia
+            contentStream.moveTo(xStart, yStart);
+            contentStream.lineTo(xStart + width, yStart);
+            contentStream.stroke();
+
+            // Prawa linia
+            contentStream.moveTo(xStart + width, yStart);
+            contentStream.lineTo(xStart + width, yStart - height);
+            contentStream.stroke();
+
+            // Dolna linia
+            contentStream.moveTo(xStart, yStart - height);
+            contentStream.lineTo(xStart + width, yStart - height);
+            contentStream.stroke();
+
+            // Lewa linia
+            contentStream.moveTo(xStart, yStart);
+            contentStream.lineTo(xStart, yStart - height);
+            contentStream.stroke();
             contentStream.beginText();
-            contentStream.newLineAtOffset(50, 700);
+
+
+
+            contentStream.newLineAtOffset(xStart, yStart);
+
+
+
+
+
             contentStream.showText("Numer faktury: " + numerFaktury.getText());
             contentStream.newLineAtOffset(0, -20);
             contentStream.showText("Data wystawienia: " + dataWystawienia.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
