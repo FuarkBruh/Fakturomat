@@ -56,13 +56,7 @@ public class PDFGenerator {
             contentStream.stroke();
             contentStream.beginText();
 
-
-
             contentStream.newLineAtOffset(xStart, yStart);
-
-
-
-
 
             contentStream.showText("Numer faktury: " + numerFaktury.getText());
             contentStream.newLineAtOffset(0, -20);
