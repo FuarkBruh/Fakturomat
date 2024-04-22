@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.UUID;
 
 public class Controller {
-    public ComboBox statusPlatnosci;
+    public ComboBox <String> statusPlatnosci;
     public DatePicker terminPlatnosci;
-    public ComboBox sposobPlatnosci;
+    public ComboBox <String> sposobPlatnosci;
     public TextArea uwagi;
     public DatePicker dataPlatnosci;
     @FXML
@@ -46,11 +46,11 @@ public class Controller {
     private ComboBox<String> stawkaVAT;
     @FXML
     private VBox poziomyVBox;
-    private List<TextField> listaNazwaTowaru = new ArrayList<>();
-    private List<ComboBox<String>> listaJednostkaMiary = new ArrayList<>();
-    private List<TextField> listaIlosc = new ArrayList<>();
-    private List<TextField> listaCenaNetto = new ArrayList<>();
-    private List<ComboBox<String>> listaStawkaVAT = new ArrayList<>();
+    private final List<TextField> listaNazwaTowaru = new ArrayList<>();
+    private final List<ComboBox<String>> listaJednostkaMiary = new ArrayList<>();
+    private final List<TextField> listaIlosc = new ArrayList<>();
+    private final List<TextField> listaCenaNetto = new ArrayList<>();
+    private final List<ComboBox<String>> listaStawkaVAT = new ArrayList<>();
     @FXML
     protected void dodajPozycje() {
         String idLokalne = String.valueOf(UUID.randomUUID());
