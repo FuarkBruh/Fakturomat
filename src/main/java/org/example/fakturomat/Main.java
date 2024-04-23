@@ -12,23 +12,15 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("faktura.fxml"));
-        GridPane root = fxmlLoader.load();
+        Scene scene = new Scene(fxmlLoader.load(), 700, 500);
 
-        // Pobierz szerokość i wysokość ekranu
-        double screenWidth = stage.getWidth();
-        double screenHeight = stage.getHeight();
-
-        // Ustaw proporcjonalne położenie elementów na ekranie
-        root.setPrefWidth(screenWidth);
-        root.setPrefHeight(screenHeight);
-
-        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Faktura");
 
         // Ustaw kolor tła dla sceny
         scene.getRoot().setStyle("-fx-background-color: lightgrey;");
 
+        stage.setScene(scene);
         stage.show();
     }
 
