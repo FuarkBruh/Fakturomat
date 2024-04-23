@@ -16,10 +16,6 @@ public class Main extends Application {
 
         stage.setScene(scene);
         stage.setTitle("Faktura");
-
-        // Ustaw kolor tła dla sceny
-        scene.getRoot().setStyle("-fx-background-color: lightgrey;");
-
         stage.setScene(scene);
         stage.show();
     }

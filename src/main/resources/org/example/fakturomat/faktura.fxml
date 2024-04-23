@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- Deklaracja XML -->
+
 <?import java.lang.Integer?>
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
@@ -55,60 +56,60 @@
                   <RowConstraints minHeight="50.0" prefHeight="30.0" vgrow="NEVER" />
               </rowConstraints>
               <!-- Numer faktury -->
-              <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                   <Text layoutX="351.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numer faktury" />
                   <TextField fx:id="numerFaktury" layoutX="347.0" layoutY="93.0" maxWidth="200.0" prefHeight="26.0" prefWidth="175.0" />
               </VBox>
       
               <!-- Nabywca -->
-              <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
                   <Text layoutX="347.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nabywca" />
                   <TextField fx:id="nabywca" layoutX="347.0" layoutY="153.0" maxWidth="200.0" prefHeight="26.0" prefWidth="175.0" />
               </VBox>
       
               <!-- NIP -->
-              <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
                   <Text layoutX="347.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NIP" />
                   <TextField fx:id="nip" layoutX="347.0" layoutY="213.0" maxWidth="200.0" prefHeight="26.0" prefWidth="175.0" />
               </VBox>
               <!-- Ulica -->
-              <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
                   <Text text="Ulica" />
                   <TextField fx:id="ulica" maxWidth="200.0" prefHeight="26.0" prefWidth="175.0" />
               </VBox>
       
               <!-- Miasto -->
-              <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
+              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.rowIndex="4">
                   <Text text="Miasto" />
                   <TextField fx:id="miasto" maxWidth="200.0" prefHeight="26.0" prefWidth="175.0" />
               </VBox>
       
               <!-- Data wystawienia -->
-              <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                   <Text text="Data wystawienia" />
                   <DatePicker fx:id="dataWystawienia" prefHeight="26.0" prefWidth="175.0" />
               </VBox>
       
               <!-- Termin platnosci -->
-              <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                   <Text text="Termin płatności" />
                   <DatePicker fx:id="terminPlatnosci" prefHeight="26.0" prefWidth="175.0" />
               </VBox>
       
               <!-- Data platnosci -->
-              <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                   <Text text="Data płatności" />
                   <DatePicker fx:id="dataPlatnosci" prefHeight="26.0" prefWidth="175.0" />
               </VBox>
       
               <!-- Data sprzedaży -->
-              <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
+              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
                   <Text text="Data sprzedaży" />
                   <DatePicker fx:id="dataSprzedazy" prefHeight="26.0" prefWidth="175.0" />
               </VBox>
       
               <!-- Status platnosci -->
-              <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                   <Text text="Status" />
                   <ComboBox fx:id="statusPlatnosci" prefHeight="26.0" prefWidth="175.0">
                       <items>
@@ -122,7 +123,7 @@
               </VBox>
       
               <!-- Sposob platnosci -->
-              <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                   <Text text="Sposób płatności" />
                   <ComboBox fx:id="sposobPlatnosci" prefHeight="26.0" prefWidth="175.0">
                       <items>
@@ -135,7 +136,7 @@
               </VBox>
       
               <!-- Wybór osoby wystawiającej -->
-              <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
                   <!-- Wybór osoby wystawiającej -->
                   <Text layoutX="796.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Osoba wystawiająca" />
                   <ComboBox fx:id="osobaWystawiajaca" layoutX="760.0" layoutY="372.0" prefHeight="26.0" prefWidth="175.0">
