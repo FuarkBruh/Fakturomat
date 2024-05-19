@@ -6,9 +6,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+
+import java.util.*;
 
 public class Controller {
     public ComboBox statusPlatnosci;
@@ -50,6 +49,8 @@ public class Controller {
     private final List<TextField> listaIlosc = new ArrayList<>();
     private final List<TextField> listaCenaNetto = new ArrayList<>();
     private final List<ComboBox<String>> listaStawkaVAT = new ArrayList<>();
+    private final Map<String, Double> cenyOrazVat = new HashMap<>();
+
     @FXML
     protected void dodajPozycje() {
         String idLokalne = String.valueOf(UUID.randomUUID());
@@ -59,34 +60,78 @@ public class Controller {
         nowaNazwaTowaru.setPrefWidth(nazwaTowaru.getPrefWidth());
         nowaNazwaTowaru.setId("nazwaTowaru_" + idLokalne);
         listaNazwaTowaru.add(nowaNazwaTowaru);
+
         ComboBox<String> nowaJednostkaMiary = new ComboBox<>();
         nowaJednostkaMiary.setPrefHeight(jednostkaMiary.getPrefHeight());
         nowaJednostkaMiary.setPrefWidth(jednostkaMiary.getPrefWidth());
         nowaJednostkaMiary.setItems(jednostkaMiary.getItems());
         nowaJednostkaMiary.setId("jednostkaMiary_" + idLokalne);
         listaJednostkaMiary.add(nowaJednostkaMiary);
+
         TextField nowaIlosc = new TextField();
         nowaIlosc.setPrefHeight(ilosc.getPrefHeight());
         nowaIlosc.setPrefWidth(ilosc.getPrefWidth());
         nowaIlosc.setId("ilosc_" + idLokalne);
         listaIlosc.add(nowaIlosc);
+
         TextField nowaCenaNetto = new TextField();
         nowaCenaNetto.setPrefHeight(cenaNetto.getPrefHeight());
         nowaCenaNetto.setPrefWidth(cenaNetto.getPrefWidth());
         nowaCenaNetto.setId("cenaNetto_" + idLokalne);
         listaCenaNetto.add(nowaCenaNetto);
+
         ComboBox<String> nowaStawkaVAT = new ComboBox<>();
         nowaStawkaVAT.setPrefHeight(stawkaVAT.getPrefHeight());
         nowaStawkaVAT.setPrefWidth(stawkaVAT.getPrefWidth());
         nowaStawkaVAT.setId("stawkaVAT_" + idLokalne);
         listaStawkaVAT.add(nowaStawkaVAT);
+
+        // Dodanie pary cen netto i stawek VAT do mapy
+        String stawkaVATValue = stawkaVAT.getValue();
+        String cenaNettoS = cenaNetto.getText();
+        double cenaNettoValue = Double.parseDouble(cenaNettoS);
+
+        if (cenyOrazVat.containsKey(stawkaVATValue)) {
+            // Aktualizacja sumy cen netto dla danej stawki VAT
+            double sumaNetto = cenyOrazVat.get(stawkaVATValue);
+            sumaNetto += cenaNettoValue;
+            cenyOrazVat.put(stawkaVATValue, sumaNetto);
+        } else {
+            // Dodanie nowej sumy cen netto dla danej stawki VAT
+            cenyOrazVat.put(stawkaVATValue, cenaNettoValue);
+        }
+
         // Tworzenie nowego HBox dla kolejnej pozycji towarowej
         HBox nowyPoziomyHBox = new HBox();
         nowyPoziomyHBox.setSpacing(10.0);
         nowyPoziomyHBox.getChildren().addAll(nowaNazwaTowaru, nowaJednostkaMiary, nowaIlosc, nowaCenaNetto, nowaStawkaVAT);
+
         // Dodanie HBox do VBox
         poziomyVBox.getChildren().add(nowyPoziomyHBox);
+
+        kalkulujSume();
     }
+
+    protected void kalkulujSume() {
+        double sumaBrutto = 0.0;
+
+        for (Map.Entry<String, Double> entry : cenyOrazVat.entrySet()) {
+            String stawkaVAT = entry.getKey();
+            double cenaNetto = entry.getValue();
+
+            // Oblicz wartość brutto dla danej stawki VAT
+            double procentVAT = Double.parseDouble(stawkaVAT); // Usuń znak procentu i przekonwertuj na double
+            double cenaBrutto = cenaNetto * (1 + procentVAT / 100);
+
+            // Dodaj wartość brutto do sumy
+            sumaBrutto += cenaBrutto;
+        }
+
+        // Tutaj możesz zrobić coś z sumą brutto, np. wyświetlić ją w interfejsie użytkownika lub zapisać do jakiejś zmiennej
+        System.out.println("Suma brutto dla wszystkich pozycji faktury: " + sumaBrutto);
+    }
+
+
     @FXML
     protected void onGenerujButtonClick() {
         PDFGenerator.generatePDF(
