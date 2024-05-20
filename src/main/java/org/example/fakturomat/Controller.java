@@ -50,6 +50,7 @@ public class Controller {
     private final List<TextField> listaCenaNetto = new ArrayList<>();
     private final List<ComboBox<String>> listaStawkaVAT = new ArrayList<>();
     private final Map<String, Double> cenyOrazVat = new HashMap<>();
+    private static int pozycja = 0;
 
     @FXML
     public void initialize() {
@@ -68,8 +69,8 @@ public class Controller {
 
     @FXML
     protected void dodajPozycje() {
-        String idLokalne = String.valueOf(UUID.randomUUID());
-
+        String idLokalne = String.valueOf(pozycja);
+        pozycja++;
         TextField nowaNazwaTowaru = new TextField();
         nowaNazwaTowaru.setPrefHeight(nazwaTowaru.getPrefHeight());
         nowaNazwaTowaru.setPrefWidth(nazwaTowaru.getPrefWidth());
@@ -103,10 +104,10 @@ public class Controller {
         listaStawkaVAT.add(nowaStawkaVAT);
 
         HBox nowyPoziomyHBox = new HBox();
-        nowyPoziomyHBox.setSpacing(0.0);
+        nowyPoziomyHBox.setSpacing(10.0);
         nowyPoziomyHBox.getChildren().addAll(nowaNazwaTowaru, nowaJednostkaMiary, nowaIlosc, nowaCenaNetto, nowaStawkaVAT);
 
-        poziomyVBox.getChildren().add(nowyPoziomyHBox);
+        poziomyVBox.getChildren().addLast(nowyPoziomyHBox);
 
         addListeners(nowaCenaNetto, nowaStawkaVAT);
         kalkulujSume();
