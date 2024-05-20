@@ -1,7 +1,6 @@
 package org.example.fakturomat;
 
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -104,7 +103,7 @@ public class Controller {
         listaStawkaVAT.add(nowaStawkaVAT);
 
         HBox nowyPoziomyHBox = new HBox();
-        nowyPoziomyHBox.setSpacing(10.0);
+        nowyPoziomyHBox.setSpacing(0.0);
         nowyPoziomyHBox.getChildren().addAll(nowaNazwaTowaru, nowaJednostkaMiary, nowaIlosc, nowaCenaNetto, nowaStawkaVAT);
 
         poziomyVBox.getChildren().add(nowyPoziomyHBox);
@@ -113,8 +112,8 @@ public class Controller {
         kalkulujSume();
     }
 
-    protected void wyswietlanieSumyBrutto() {
-        //wyswietlaczBrutto.setText(sumaBrutto);
+    protected void wyswietlanieSumyBrutto(String sumaBruttoString) {
+        wyswietlaczBrutto.setText(sumaBruttoString);
     }
 
     protected void wyswietlanieSumyNetto() {
@@ -162,7 +161,7 @@ public class Controller {
 
         System.out.println("Suma brutto dla wszystkich pozycji faktury: " + sumaBrutto);
         String sumaBruttoString = String.valueOf(sumaBrutto);
-        wyswietlaczBrutto.setText(sumaBruttoString);
+        wyswietlanieSumyBrutto(sumaBruttoString);
     }
 
     @FXML
