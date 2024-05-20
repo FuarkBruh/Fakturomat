@@ -1,9 +1,6 @@
 package org.example.fakturomat;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -44,6 +41,8 @@ public class Controller {
     private ComboBox<String> stawkaVAT;
     @FXML
     private VBox poziomyVBox;
+    @FXML
+    private Label wyswietlaczBrutto;
     private final List<TextField> listaNazwaTowaru = new ArrayList<>();
     private final List<ComboBox<String>> listaJednostkaMiary = new ArrayList<>();
     private final List<TextField> listaIlosc = new ArrayList<>();
@@ -83,22 +82,24 @@ public class Controller {
         ComboBox<String> nowaStawkaVAT = new ComboBox<>();
         nowaStawkaVAT.setPrefHeight(stawkaVAT.getPrefHeight());
         nowaStawkaVAT.setPrefWidth(stawkaVAT.getPrefWidth());
+        nowaStawkaVAT.setItems(stawkaVAT.getItems());
         nowaStawkaVAT.setId("stawkaVAT_" + idLokalne);
         listaStawkaVAT.add(nowaStawkaVAT);
 
         // Dodanie pary cen netto i stawek VAT do mapy
-        String stawkaVATValue = stawkaVAT.getValue();
+        String stawkaVATValue = String.valueOf(stawkaVAT.getValue());
         String cenaNettoS = cenaNetto.getText();
-        double cenaNettoValue = Double.parseDouble(cenaNettoS);
-
-        if (cenyOrazVat.containsKey(stawkaVATValue)) {
-            // Aktualizacja sumy cen netto dla danej stawki VAT
-            double sumaNetto = cenyOrazVat.get(stawkaVATValue);
-            sumaNetto += cenaNettoValue;
-            cenyOrazVat.put(stawkaVATValue, sumaNetto);
-        } else {
-            // Dodanie nowej sumy cen netto dla danej stawki VAT
-            cenyOrazVat.put(stawkaVATValue, cenaNettoValue);
+        if(cenaNettoS != null) {
+            double cenaNettoValue = Double.parseDouble(cenaNettoS);
+            if (cenyOrazVat.containsKey(stawkaVATValue)) {
+                // Aktualizacja sumy cen netto dla danej stawki VAT
+                double sumaNetto = cenyOrazVat.get(stawkaVATValue);
+                sumaNetto += cenaNettoValue;
+                cenyOrazVat.put(stawkaVATValue, sumaNetto);
+            } else {
+                // Dodanie nowej sumy cen netto dla danej stawki VAT
+                cenyOrazVat.put(stawkaVATValue, cenaNettoValue);
+            }
         }
 
         // Tworzenie nowego HBox dla kolejnej pozycji towarowej
@@ -129,6 +130,8 @@ public class Controller {
 
         // Tutaj możesz zrobić coś z sumą brutto, np. wyświetlić ją w interfejsie użytkownika lub zapisać do jakiejś zmiennej
         System.out.println("Suma brutto dla wszystkich pozycji faktury: " + sumaBrutto);
+        String sumaBruttoString = String.valueOf(sumaBrutto);
+        wyswietlaczBrutto.setText(sumaBruttoString);
     }
 
 
