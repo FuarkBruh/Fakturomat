@@ -152,6 +152,7 @@
                         </items>
                     </ComboBox>
                 </VBox>
+                <!--Wyswietlanie sumy brutto!-->
             <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="wyswietlaczBrutto"/>
             </GridPane>
             <HBox alignment="CENTER" minHeight="50.0" minWidth="50.0" prefHeight="50.0" prefWidth="50.0" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="1">
