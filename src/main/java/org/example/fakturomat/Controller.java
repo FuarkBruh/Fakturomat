@@ -1,4 +1,7 @@
 package org.example.fakturomat;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -9,8 +12,7 @@ import java.util.*;
 public class Controller {
     public ComboBox statusPlatnosci;
     public DatePicker terminPlatnosci;
-
-    public ComboBox <String> sposobPlatnosci;
+    public ComboBox<String> sposobPlatnosci;
     public TextArea uwagi;
     public DatePicker dataPlatnosci;
     @FXML
@@ -51,9 +53,24 @@ public class Controller {
     private final Map<String, Double> cenyOrazVat = new HashMap<>();
 
     @FXML
+    public void initialize() {
+        addListeners(cenaNetto, stawkaVAT);
+    }
+
+    private void addListeners(TextField cenaNettoField, ComboBox<String> stawkaVATBox) {
+        ChangeListener<Object> listener = (observable, oldValue, newValue) -> {
+            dodawanieNettoDlaTejSamejStawki();
+            kalkulujSume();
+        };
+
+        cenaNettoField.textProperty().addListener(listener);
+        stawkaVATBox.valueProperty().addListener(listener);
+    }
+
+    @FXML
     protected void dodajPozycje() {
         String idLokalne = String.valueOf(UUID.randomUUID());
-        // Tworzenie nowych kontrolki i nadawanie im unikatowych fx:id
+
         TextField nowaNazwaTowaru = new TextField();
         nowaNazwaTowaru.setPrefHeight(nazwaTowaru.getPrefHeight());
         nowaNazwaTowaru.setPrefWidth(nazwaTowaru.getPrefWidth());
@@ -86,31 +103,43 @@ public class Controller {
         nowaStawkaVAT.setId("stawkaVAT_" + idLokalne);
         listaStawkaVAT.add(nowaStawkaVAT);
 
-        // Dodanie pary cen netto i stawek VAT do mapy
-        String stawkaVATValue = String.valueOf(stawkaVAT.getValue());
-        String cenaNettoS = cenaNetto.getText();
-        if(cenaNettoS != null) {
-            double cenaNettoValue = Double.parseDouble(cenaNettoS);
-            if (cenyOrazVat.containsKey(stawkaVATValue)) {
-                // Aktualizacja sumy cen netto dla danej stawki VAT
-                double sumaNetto = cenyOrazVat.get(stawkaVATValue);
-                sumaNetto += cenaNettoValue;
-                cenyOrazVat.put(stawkaVATValue, sumaNetto);
-            } else {
-                // Dodanie nowej sumy cen netto dla danej stawki VAT
-                cenyOrazVat.put(stawkaVATValue, cenaNettoValue);
-            }
-        }
-
-        // Tworzenie nowego HBox dla kolejnej pozycji towarowej
         HBox nowyPoziomyHBox = new HBox();
         nowyPoziomyHBox.setSpacing(10.0);
         nowyPoziomyHBox.getChildren().addAll(nowaNazwaTowaru, nowaJednostkaMiary, nowaIlosc, nowaCenaNetto, nowaStawkaVAT);
 
-        // Dodanie HBox do VBox
         poziomyVBox.getChildren().add(nowyPoziomyHBox);
 
+        addListeners(nowaCenaNetto, nowaStawkaVAT);
         kalkulujSume();
+    }
+
+    protected void wyswietlanieSumyBrutto() {
+        //wyswietlaczBrutto.setText(sumaBrutto);
+    }
+
+    protected void wyswietlanieSumyNetto() {
+
+    }
+
+    protected void wyswietlaniePodsumNetto() {
+
+    }
+
+    protected void wyswietlaniePodsumBrutto() {
+
+    }
+
+    protected void dodawanieNettoDlaTejSamejStawki() {
+        cenyOrazVat.clear(); // Clear the map to recalculate
+        for (int i = 0; i < listaNazwaTowaru.size(); i++) {
+            String stawkaVATValue = String.valueOf(listaStawkaVAT.get(i).getValue());
+            String cenaNettoS = listaCenaNetto.get(i).getText();
+            if (stawkaVATValue != null && cenaNettoS != null && !cenaNettoS.isEmpty()) {
+                double cenaNettoValue = Double.parseDouble(cenaNettoS);
+                cenyOrazVat.merge(stawkaVATValue, cenaNettoValue, Double::sum);
+            }
+        }
+        System.out.println("Ceny oraz vat: " + cenyOrazVat);
     }
 
     protected void kalkulujSume() {
@@ -120,20 +149,21 @@ public class Controller {
             String stawkaVAT = entry.getKey();
             double cenaNetto = entry.getValue();
 
-            // Oblicz wartość brutto dla danej stawki VAT
-            double procentVAT = Double.parseDouble(stawkaVAT); // Usuń znak procentu i przekonwertuj na double
-            double cenaBrutto = cenaNetto * (1 + procentVAT / 100);
+            try {
+                double procentVAT = Double.parseDouble(stawkaVAT);
+                double cenaBrutto = cenaNetto * (1 + procentVAT / 100);
 
-            // Dodaj wartość brutto do sumy
-            sumaBrutto += cenaBrutto;
+                sumaBrutto += cenaBrutto;
+            }
+            catch (NumberFormatException e) {
+                System.err.println("Invalid input for stawkaVAT: " + stawkaVAT);
+            }
         }
 
-        // Tutaj możesz zrobić coś z sumą brutto, np. wyświetlić ją w interfejsie użytkownika lub zapisać do jakiejś zmiennej
         System.out.println("Suma brutto dla wszystkich pozycji faktury: " + sumaBrutto);
         String sumaBruttoString = String.valueOf(sumaBrutto);
         wyswietlaczBrutto.setText(sumaBruttoString);
     }
-
 
     @FXML
     protected void onGenerujButtonClick() {
