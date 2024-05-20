@@ -9,10 +9,15 @@ import javafx.scene.layout.VBox;
 import java.util.*;
 
 public class Controller {
+    @FXML
     public ComboBox statusPlatnosci;
+    @FXML
     public DatePicker terminPlatnosci;
+    @FXML
     public ComboBox<String> sposobPlatnosci;
-    public TextArea uwagi;
+    @FXML
+    public TextField uwagi;
+    @FXML
     public DatePicker dataPlatnosci;
     @FXML
     private TextField numerFaktury;

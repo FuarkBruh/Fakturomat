@@ -38,8 +38,9 @@
                 <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="1.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="300.0" prefHeight="30.0" vgrow="NEVER" />
-                <RowConstraints minHeight="50.0" prefHeight="30.0" vgrow="NEVER" />
+                <RowConstraints maxHeight="295.20001220703125" minHeight="285.6000061035156" prefHeight="285.6000061035156" vgrow="NEVER" />
+            <RowConstraints maxHeight="291.99999999999994" minHeight="7.999999999999943" prefHeight="67.79999389648441" vgrow="NEVER" />
+                <RowConstraints maxHeight="342.4" minHeight="50.0" prefHeight="52.0000061035156" vgrow="NEVER" />
                 <RowConstraints maxHeight="95.0" minHeight="29.0" prefHeight="44.0" vgrow="NEVER" />
                 <RowConstraints maxHeight="271.0" minHeight="205.0" prefHeight="256.0" />
             </rowConstraints>
@@ -155,14 +156,14 @@
                 <!-- Wyswietlanie sumy brutto -->
             <Label fx:id="wyswietlaczBrutto" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             </GridPane>
-            <HBox alignment="CENTER" minHeight="50.0" minWidth="50.0" prefHeight="50.0" prefWidth="50.0" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <HBox alignment="CENTER" minHeight="50.0" minWidth="50.0" prefHeight="50.0" prefWidth="50.0" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                 <!-- Przycisk generacji faktury do PDF -->
                 <Button layoutX="649.0" layoutY="523.0" mnemonicParsing="false" onAction="#onGenerujButtonClick" text="Generuj PDF" />
                 <!-- Przycisk do dodawania pozycji do faktury -->
                 <Button layoutX="549.0" layoutY="523.0" mnemonicParsing="false" onAction="#dodajPozycje" text="Dodaj pozycje" />
             </HBox>
 
-            <GridPane alignment="CENTER" minHeight="50.0" minWidth="50.0" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <GridPane alignment="CENTER" minHeight="50.0" minWidth="50.0" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                 <!-- Towar -->
                 <columnConstraints>
                     <ColumnConstraints hgrow="NEVER" maxWidth="415.0" minWidth="160.0" prefWidth="402.0" />
@@ -192,7 +193,7 @@
             </GridPane>
 
             <!-- ScrollPane dla obszaru dodawania towarów -->
-            <ScrollPane layoutX="331.0" layoutY="596.0" prefHeight="200.0" prefWidth="800.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <ScrollPane layoutX="331.0" layoutY="596.0" prefHeight="200.0" prefWidth="800.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                 <VBox fx:id="poziomyVBox" alignment="TOP_CENTER" layoutX="34.0" layoutY="607.0" prefHeight="61.0" prefWidth="618.0">
                     <HBox alignment="TOP_CENTER" minWidth="800.0" prefHeight="37.0" prefWidth="800.0" spacing="10">
 
@@ -225,6 +226,14 @@
                     </HBox>
                 </VBox>
             </ScrollPane>
+         <VBox alignment="TOP_CENTER" prefHeight="59.0" prefWidth="780.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+
+             <!-- Pole do wpisania uwag -->
+            <children>
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Uwagi" />
+               <TextField fx:id="uwagi" maxWidth="500.0" prefHeight="35.0" prefWidth="600.0" />
+            </children>
+         </VBox>
 
         </GridPane>
     </children>

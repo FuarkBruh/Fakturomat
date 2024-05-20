@@ -20,7 +20,7 @@ public class PDFGenerator {
                                    ComboBox<String> osobaWystawiajaca, TextField nazwaTowaru, ComboBox<String> jednostkaMiary,
                                    TextField ilosc, TextField cenaNetto, ComboBox<String> stawkaVAT,
                                    ComboBox<String> statusPlatnosci, DatePicker terminPlatnosci, ComboBox<String> sposobPlatnosci,
-                                   TextArea uwagi, DatePicker dataPlatnosci, List<TextField> listaNazwaTowaru, List<TextField> listaIlosc,
+                                   TextField uwagi, DatePicker dataPlatnosci, List<TextField> listaNazwaTowaru, List<TextField> listaIlosc,
                                    List<ComboBox<String>> listaJednostkaMiary, List<TextField> listaCenaNetto, List<ComboBox<String>> listaStawkaVAT) {
         try {
             PDDocument document = new PDDocument();
