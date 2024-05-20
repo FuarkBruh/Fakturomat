@@ -49,6 +49,11 @@ public class Controller {
     private VBox poziomyVBox;
     @FXML
     private Label wyswietlaczBrutto;
+    @FXML
+    private Label wyswietlaczNetto;
+    @FXML
+    private Label wyswietlaczPodatku;
+
     private final List<TextField> listaNazwaTowaru = new ArrayList<>();
     private final List<ComboBox<String>> listaJednostkaMiary = new ArrayList<>();
     private final List<TextField> listaIlosc = new ArrayList<>();
@@ -122,8 +127,12 @@ public class Controller {
         wyswietlaczBrutto.setText(sumaBruttoString);
     }
 
-    protected void wyswietlanieSumyNetto() {
+    protected void wyswietlanieSumyNetto(String sumaNettoString) {
+        wyswietlaczNetto.setText(sumaNettoString);
+    }
 
+    protected void wyswietlanieSumyPodatkow(String sumaPodatkowString) {
+        wyswietlaczPodatku.setText(sumaPodatkowString);
     }
 
     protected void wyswietlaniePodsumNetto() {
@@ -149,16 +158,20 @@ public class Controller {
 
     protected void kalkulujSume() {
         double sumaBrutto = 0.0;
+        double sumaNetto = 0.0;
+        double sumaPodatku = 0.0;
 
         for (Map.Entry<String, Double> entry : cenyOrazVat.entrySet()) {
             String stawkaVAT = entry.getKey();
             double cenaNetto = entry.getValue();
-
             try {
                 double procentVAT = Double.parseDouble(stawkaVAT);
+                double podatek = cenaNetto * procentVAT / 100;
                 double cenaBrutto = cenaNetto * (1 + procentVAT / 100);
 
                 sumaBrutto += cenaBrutto;
+                sumaNetto += cenaNetto;
+                sumaPodatku += podatek;
             }
             catch (NumberFormatException e) {
                 System.err.println("Invalid input for stawkaVAT: " + stawkaVAT);
@@ -167,7 +180,14 @@ public class Controller {
 
         System.out.println("Suma brutto dla wszystkich pozycji faktury: " + sumaBrutto);
         String sumaBruttoString = String.valueOf(sumaBrutto);
+        System.out.println("Suma netto dla wszystkich pozycji faktury: " + sumaNetto);
+        String sumaNettoString = String.valueOf(sumaNetto);
+        System.out.println("Suma podatkow dla wszystkich pozycji faktury: " + sumaPodatku);
+        String sumaPodatkuString = String.valueOf(sumaPodatku);
+
         wyswietlanieSumyBrutto(sumaBruttoString);
+        wyswietlanieSumyNetto(sumaNettoString);
+        wyswietlanieSumyPodatkow(sumaPodatkuString);
     }
 
     @FXML

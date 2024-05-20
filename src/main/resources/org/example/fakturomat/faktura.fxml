@@ -153,8 +153,14 @@
                         </items>
                     </ComboBox>
                 </VBox>
-                <!-- Wyswietlanie sumy brutto -->
-            <Label fx:id="wyswietlaczBrutto" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                      <!-- Wyswietlanie sumy brutto -->
+                  <Label fx:id="wyswietlaczBrutto" text="wyswietlaczBrutto" />
+               </children>
+            </HBox>
+            <Label fx:id="wyswietlaczPodatku" text="wyswietlaczPodatku" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="wyswietlaczNetto" text="wyswietlaczNetto" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             </GridPane>
             <HBox alignment="CENTER" minHeight="50.0" minWidth="50.0" prefHeight="50.0" prefWidth="50.0" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                 <!-- Przycisk generacji faktury do PDF -->
