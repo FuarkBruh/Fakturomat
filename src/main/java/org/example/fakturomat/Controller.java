@@ -5,12 +5,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.converter.LocalDateStringConverter;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Controller {
     @FXML
-    public ComboBox statusPlatnosci;
+    public ComboBox<String> statusPlatnosci;
     @FXML
     public DatePicker terminPlatnosci;
     @FXML
@@ -62,9 +65,14 @@ public class Controller {
     private final Map<String, Double> cenyOrazVat = new HashMap<>();
     private static int pozycja = 0;
 
+    // Sekwencyjny numer faktury
+    private static int numerFakturySekwencyjny = 1;
+
     @FXML
     public void initialize() {
         addListeners(cenaNetto, stawkaVAT);
+        dataWystawienia.valueProperty().addListener((observable, oldValue, newValue) -> nadanieNumeruFaktury());
+        nadanieNumeruFaktury();
     }
 
     private void addListeners(TextField cenaNettoField, ComboBox<String> stawkaVATBox) {
@@ -117,10 +125,28 @@ public class Controller {
         nowyPoziomyHBox.setSpacing(10.0);
         nowyPoziomyHBox.getChildren().addAll(nowaNazwaTowaru, nowaJednostkaMiary, nowaIlosc, nowaCenaNetto, nowaStawkaVAT);
 
-        poziomyVBox.getChildren().addLast(nowyPoziomyHBox);
+        poziomyVBox.getChildren().add(nowyPoziomyHBox);
 
         addListeners(nowaCenaNetto, nowaStawkaVAT);
         kalkulujSume();
+    }
+
+    @FXML
+    protected void nadanieNumeruFaktury() {
+        LocalDate selectedDate = dataWystawienia.getValue();
+        if (selectedDate == null) {
+            // Jeśli data nie jest wybrana, ustaw na bieżącą datę
+            selectedDate = LocalDate.now();
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        String formattedDate = selectedDate.format(formatter);
+
+        String numerFakturyString = formattedDate + "/" + numerFakturySekwencyjny;
+        numerFaktury.setText(numerFakturyString);
+
+        // Zwiększenie sekwencyjnego numeru faktury
+        numerFakturySekwencyjny++;
     }
 
     protected void wyswietlanieSumyBrutto(String sumaBruttoString) {
@@ -133,14 +159,6 @@ public class Controller {
 
     protected void wyswietlanieSumyPodatkow(String sumaPodatkowString) {
         wyswietlaczPodatku.setText(sumaPodatkowString);
-    }
-
-    protected void wyswietlaniePodsumNetto() {
-
-    }
-
-    protected void wyswietlaniePodsumBrutto() {
-
     }
 
     protected void dodawanieNettoDlaTejSamejStawki() {
@@ -172,8 +190,7 @@ public class Controller {
                 sumaBrutto += cenaBrutto;
                 sumaNetto += cenaNetto;
                 sumaPodatku += podatek;
-            }
-            catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 System.err.println("Invalid input for stawkaVAT: " + stawkaVAT);
             }
         }
@@ -182,7 +199,7 @@ public class Controller {
         String sumaBruttoString = String.valueOf(sumaBrutto);
         System.out.println("Suma netto dla wszystkich pozycji faktury: " + sumaNetto);
         String sumaNettoString = String.valueOf(sumaNetto);
-        System.out.println("Suma podatkow dla wszystkich pozycji faktury: " + sumaPodatku);
+        System.out.println("Suma podatku dla wszystkich pozycji faktury: " + sumaPodatku);
         String sumaPodatkuString = String.valueOf(sumaPodatku);
 
         wyswietlanieSumyBrutto(sumaBruttoString);
