@@ -56,7 +56,7 @@ public class Controller {
     @FXML
     private Label wyswietlaczPodatku;
     @FXML
-    private Label podsumowanie;
+    protected VBox podsumowanie;
 
     private final List<TextField> listaNazwaTowaru = new ArrayList<>();
     private final List<ComboBox<String>> listaJednostkaMiary = new ArrayList<>();
@@ -88,8 +88,6 @@ public class Controller {
 
     @FXML
     protected void dodajPozycje() {
-        podsumowanieStawekVAT();
-
         String idLokalne = String.valueOf(pozycja);
         pozycja++;
         TextField nowaNazwaTowaru = new TextField();
@@ -134,8 +132,11 @@ public class Controller {
         kalkulujSume();
     }
 
-    protected void podsumowanieStawekVAT() {
-        podsumowanie.setText("Witam");
+    protected void wyswietlaniePodsumowania(String stawkaVATStr, double cenaNetto, double cenaBrutto) {
+        String cenaNettoStr = String.valueOf(cenaNetto);
+        String cenaBruttoStr = String.valueOf(cenaBrutto);
+        Label nowePodsumowanie = new Label("Stawka VAT: " + stawkaVATStr + ", Netto: " + cenaNettoStr + ", Brutto: " + cenaBruttoStr);
+        podsumowanie.getChildren().add(nowePodsumowanie);
     }
 
     @FXML
@@ -186,6 +187,9 @@ public class Controller {
         double sumaNetto = 0.0;
         double sumaPodatku = 0.0;
 
+        // Clear previous summary labels
+        podsumowanie.getChildren().clear();
+
         for (Map.Entry<String, Double> entry : cenyOrazVat.entrySet()) {
             String stawkaVAT = entry.getKey();
             double cenaNetto = entry.getValue();
@@ -197,6 +201,8 @@ public class Controller {
                 sumaBrutto += cenaBrutto;
                 sumaNetto += cenaNetto;
                 sumaPodatku += podatek;
+
+                wyswietlaniePodsumowania(stawkaVAT, cenaNetto, cenaBrutto);
             } catch (NumberFormatException e) {
                 System.err.println("Invalid input for stawkaVAT: " + stawkaVAT);
             }

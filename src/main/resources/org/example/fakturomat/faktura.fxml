@@ -248,7 +248,7 @@
                   <children>
                      <ScrollPane prefHeight="71.0" prefWidth="651.0">
                        <content>
-                         <Label fx:id="podsumowanie"/>
+                         <VBox fx:id="podsumowanie"/>
                        </content>
                      </ScrollPane>
                   </children>
