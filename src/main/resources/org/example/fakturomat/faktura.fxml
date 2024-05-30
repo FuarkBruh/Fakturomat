@@ -19,30 +19,31 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="TOP_CENTER" prefHeight="728.0" prefWidth="856.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.fakturomat.Controller">
+<GridPane alignment="TOP_CENTER" prefHeight="919.0" prefWidth="856.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.fakturomat.Controller">
     <columnConstraints>
         <ColumnConstraints hgrow="NEVER" minWidth="25.0" prefWidth="25.0" />
         <ColumnConstraints hgrow="NEVER" minWidth="780.0" />
         <ColumnConstraints hgrow="NEVER" minWidth="25.0" prefWidth="25.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="171.0" minHeight="10.0" prefHeight="171.0" vgrow="NEVER" />
-        <RowConstraints maxHeight="982.0" minHeight="708.0" prefHeight="708.0" vgrow="NEVER" />
-        <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="NEVER" />
+        <RowConstraints maxHeight="171.0" minHeight="0.0" prefHeight="81.0" vgrow="NEVER" />
+        <RowConstraints maxHeight="982.0" minHeight="708.0" prefHeight="752.0" vgrow="NEVER" />
+        <RowConstraints maxHeight="56.0" minHeight="0.0" prefHeight="56.0" vgrow="NEVER" />
     </rowConstraints>
     <children>
-        <GridPane alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="800.0" style="-fx-border-color: black; -fx-border-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <GridPane fx:id="glownyGrid" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="747.0" prefWidth="800.0" style="-fx-border-color: black; -fx-border-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <columnConstraints>
                 <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="1.0" />
                 <ColumnConstraints hgrow="NEVER" minWidth="780.0" prefWidth="300.0" />
                 <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="1.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="295.20001220703125" minHeight="285.6000061035156" prefHeight="285.6000061035156" vgrow="NEVER" />
-            <RowConstraints maxHeight="291.99999999999994" minHeight="7.999999999999943" prefHeight="67.79999389648441" vgrow="NEVER" />
-                <RowConstraints maxHeight="342.4" minHeight="50.0" prefHeight="52.0000061035156" vgrow="NEVER" />
-                <RowConstraints maxHeight="95.0" minHeight="29.0" prefHeight="44.0" vgrow="NEVER" />
-                <RowConstraints maxHeight="271.0" minHeight="205.0" prefHeight="256.0" />
+                <RowConstraints maxHeight="295.20001220703125" minHeight="188.0" prefHeight="263.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="291.99999999999994" minHeight="7.999999999999943" prefHeight="59.0" vgrow="NEVER" />
+            <RowConstraints maxHeight="342.4" minHeight="12.0" prefHeight="87.0" vgrow="NEVER" />
+                <RowConstraints maxHeight="342.4" minHeight="29.0" prefHeight="36.0" vgrow="NEVER" />
+                <RowConstraints maxHeight="125.0" minHeight="28.0" prefHeight="53.0" vgrow="NEVER" />
+                <RowConstraints maxHeight="272.0" minHeight="175.0" prefHeight="221.0" />
             </rowConstraints>
             <GridPane alignment="CENTER" prefHeight="300.0" prefWidth="800.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                 <columnConstraints>
@@ -51,11 +52,11 @@
                     <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="300.0" />
                 </columnConstraints>
                 <rowConstraints>
-                    <RowConstraints minHeight="50.0" prefHeight="30.0" vgrow="NEVER" />
-                    <RowConstraints minHeight="50.0" prefHeight="30.0" vgrow="NEVER" />
-                    <RowConstraints minHeight="50.0" prefHeight="30.0" vgrow="NEVER" />
-                    <RowConstraints minHeight="50.0" prefHeight="30.0" vgrow="NEVER" />
-                    <RowConstraints minHeight="50.0" prefHeight="30.0" vgrow="NEVER" />
+                    <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="NEVER" />
+                    <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="NEVER" />
+                    <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="NEVER" />
+                    <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="NEVER" />
+                    <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="NEVER" />
                 </rowConstraints>
                 <!-- Numer faktury -->
                 <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
@@ -153,23 +154,23 @@
                         </items>
                     </ComboBox>
                 </VBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                      <!-- Wyswietlanie sumy brutto -->
-                  <Label fx:id="wyswietlaczBrutto" text="wyswietlaczBrutto" />
+                  <Label fx:id="wyswietlaczPodatku" text="wyswietlaczPodatku" />
                </children>
             </HBox>
-            <Label fx:id="wyswietlaczPodatku" text="wyswietlaczPodatku" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label fx:id="wyswietlaczNetto" text="wyswietlaczNetto" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                <!-- Wyswietlanie sumy brutto -->
+            <Label fx:id="wyswietlaczBrutto" text="wyswietlaczBrutto" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="wyswietlaczNetto" text="wyswietlaczNetto" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             </GridPane>
-            <HBox alignment="CENTER" minHeight="50.0" minWidth="50.0" prefHeight="50.0" prefWidth="50.0" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <HBox alignment="CENTER" minHeight="18.0" minWidth="50.0" prefHeight="18.0" prefWidth="780.0" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="3">
                 <!-- Przycisk generacji faktury do PDF -->
                 <Button layoutX="649.0" layoutY="523.0" mnemonicParsing="false" onAction="#onGenerujButtonClick" text="Generuj PDF" />
                 <!-- Przycisk do dodawania pozycji do faktury -->
                 <Button layoutX="549.0" layoutY="523.0" mnemonicParsing="false" onAction="#dodajPozycje" text="Dodaj pozycje" />
             </HBox>
 
-            <GridPane alignment="CENTER" minHeight="50.0" minWidth="50.0" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <GridPane alignment="CENTER" minHeight="50.0" minWidth="50.0" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                 <!-- Towar -->
                 <columnConstraints>
                     <ColumnConstraints hgrow="NEVER" maxWidth="415.0" minWidth="160.0" prefWidth="402.0" />
@@ -199,7 +200,7 @@
             </GridPane>
 
             <!-- ScrollPane dla obszaru dodawania towarów -->
-            <ScrollPane layoutX="331.0" layoutY="596.0" prefHeight="200.0" prefWidth="800.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <ScrollPane layoutX="331.0" layoutY="596.0" prefHeight="216.0" prefWidth="780.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                 <VBox fx:id="poziomyVBox" alignment="TOP_CENTER" layoutX="34.0" layoutY="607.0" prefHeight="61.0" prefWidth="618.0">
                     <HBox alignment="TOP_CENTER" minWidth="800.0" prefHeight="37.0" prefWidth="800.0" spacing="10">
 
@@ -232,12 +233,26 @@
                     </HBox>
                 </VBox>
             </ScrollPane>
-         <VBox alignment="TOP_CENTER" prefHeight="59.0" prefWidth="780.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <VBox alignment="TOP_CENTER" prefHeight="86.0" prefWidth="780.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
 
              <!-- Pole do wpisania uwag -->
             <children>
                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Uwagi" />
                <TextField fx:id="uwagi" maxWidth="500.0" prefHeight="35.0" prefWidth="600.0" />
+            </children>
+         </VBox>
+         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <children>
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Podsumowanie" />
+               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <ScrollPane prefHeight="71.0" prefWidth="651.0">
+                       <content>
+                         <Label fx:id="podsumowanie"/>
+                       </content>
+                     </ScrollPane>
+                  </children>
+               </HBox>
             </children>
          </VBox>
 

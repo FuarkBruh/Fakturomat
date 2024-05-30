@@ -55,6 +55,8 @@ public class Controller {
     private Label wyswietlaczNetto;
     @FXML
     private Label wyswietlaczPodatku;
+    @FXML
+    private Label podsumowanie;
 
     private final List<TextField> listaNazwaTowaru = new ArrayList<>();
     private final List<ComboBox<String>> listaJednostkaMiary = new ArrayList<>();
@@ -86,6 +88,8 @@ public class Controller {
 
     @FXML
     protected void dodajPozycje() {
+        podsumowanieStawekVAT();
+
         String idLokalne = String.valueOf(pozycja);
         pozycja++;
         TextField nowaNazwaTowaru = new TextField();
@@ -128,6 +132,10 @@ public class Controller {
 
         addListeners(nowaCenaNetto, nowaStawkaVAT);
         kalkulujSume();
+    }
+
+    protected void podsumowanieStawekVAT() {
+        podsumowanie.setText("Witam");
     }
 
     @FXML
