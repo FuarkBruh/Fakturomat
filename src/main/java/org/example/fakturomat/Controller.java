@@ -66,6 +66,7 @@ public class Controller {
     private final List<TextField> listaCenaNetto = new ArrayList<>();
     private final List<ComboBox<String>> listaStawkaVAT = new ArrayList<>();
     private final Map<String, Double> cenyOrazVat = new HashMap<>();
+    private final List<Label> listaIloscRazyBrutto = new ArrayList<>();
     private static int pozycja = 0;
 
     // Sekwencyjny numer faktury
@@ -131,6 +132,7 @@ public class Controller {
         nowaIloscRazyCenaBrutto.setPrefHeight(iloscRazyBrutto.getPrefHeight());
         nowaIloscRazyCenaBrutto.setPrefWidth(iloscRazyBrutto.getPrefWidth());
         nowaIloscRazyCenaBrutto.setId("iloscRazyBrutto_" + idLokalne);
+        listaIloscRazyBrutto.add(nowaIloscRazyCenaBrutto);
 
         HBox nowyPoziomyHBox = new HBox();
         nowyPoziomyHBox.setSpacing(5.0);
@@ -173,7 +175,7 @@ public class Controller {
                 double kosztCalkowity = ilosc * cenaBrutto;
 
                 // Aktualizuj sumę brutto
-                sumaBrutto += kosztCalkowity;
+                sumaBrutto = kosztCalkowity;
 
                 // Ustaw wartość ilosciRazyBrutto w odpowiednim Label
                 Label iloscRazyBruttoLabel = (Label) poziomyVBox.lookup("#iloscRazyBrutto_" + i);
@@ -186,6 +188,7 @@ public class Controller {
 
         // Aktualizuj etykietę sumy brutto dla wszystkich pozycji faktury
         iloscRazyBrutto.setText(String.format("%.2f", sumaBrutto));
+        listaIloscRazyBrutto.add(iloscRazyBrutto);
     }
 
     @FXML
@@ -288,10 +291,11 @@ public class Controller {
 
     @FXML
     protected void onGenerujButtonClick() {
+        //Trzeba potem dodać sprawdzenie czy wszystkie pola są wpisane, ale to potem, aby łatwiej testować
         PDFGenerator.generatePDF(
                 numerFaktury, dataWystawienia, dataSprzedazy, nabywca, nip, ulica, miasto, osobaWystawiajaca,
                 nazwaTowaru, jednostkaMiary, ilosc, cenaNetto, stawkaVAT, statusPlatnosci, terminPlatnosci,
                 sposobPlatnosci, uwagi, dataPlatnosci, listaNazwaTowaru,
-                listaIlosc, listaJednostkaMiary, listaCenaNetto, listaStawkaVAT);
+                listaIlosc, listaJednostkaMiary, listaCenaNetto, listaStawkaVAT, listaIloscRazyBrutto);
     }
 }

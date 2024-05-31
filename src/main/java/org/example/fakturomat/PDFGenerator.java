@@ -1,9 +1,6 @@
 package org.example.fakturomat;
 
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -21,7 +18,7 @@ public class PDFGenerator {
                                    TextField ilosc, TextField cenaNetto, ComboBox<String> stawkaVAT,
                                    ComboBox<String> statusPlatnosci, DatePicker terminPlatnosci, ComboBox<String> sposobPlatnosci,
                                    TextField uwagi, DatePicker dataPlatnosci, List<TextField> listaNazwaTowaru, List<TextField> listaIlosc,
-                                   List<ComboBox<String>> listaJednostkaMiary, List<TextField> listaCenaNetto, List<ComboBox<String>> listaStawkaVAT) {
+                                   List<ComboBox<String>> listaJednostkaMiary, List<TextField> listaCenaNetto, List<ComboBox<String>> listaStawkaVAT, List<Label> listaIloscRazyBrutto) {
         try {
             PDDocument document = new PDDocument();
             PDPage page = new PDPage();
@@ -73,16 +70,6 @@ public class PDFGenerator {
             contentStream.showText("Miasto: " + miasto.getText());
             contentStream.newLineAtOffset(0, -20);
             contentStream.showText("Osoba wystawiająca: " + osobaWystawiajaca.getValue());
-            contentStream.newLineAtOffset(0, -20);
-            contentStream.showText("Nazwa towaru: " + nazwaTowaru.getText());
-            contentStream.newLineAtOffset(0, -20);
-            contentStream.showText("Jednostka miary: " + jednostkaMiary.getValue());
-            contentStream.newLineAtOffset(0, -20);
-            contentStream.showText("Ilość: " + ilosc.getText());
-            contentStream.newLineAtOffset(0, -20);
-            contentStream.showText("Cena netto: " + cenaNetto.getText());
-            contentStream.newLineAtOffset(0, -20);
-            contentStream.showText("Stawka VAT: " + stawkaVAT.getValue());
 
             for (int i = 0; i < listaNazwaTowaru.size(); i++) {
                 contentStream.newLineAtOffset(0, -20);
@@ -92,9 +79,11 @@ public class PDFGenerator {
                 contentStream.newLineAtOffset(0, -20);
                 contentStream.showText("Ilość: " + listaIlosc.get(i).getText());
                 contentStream.newLineAtOffset(0, -20);
-                contentStream.showText("Cena netto: " + listaCenaNetto.get(i).getText());
+                contentStream.showText("Cena jednostkowa netto: " + listaCenaNetto.get(i).getText());
                 contentStream.newLineAtOffset(0, -20);
-                contentStream.showText("Stawka VAT: " + listaStawkaVAT.get(i).getValue());
+                contentStream.showText("Stawka VAT: " + String.valueOf(listaStawkaVAT.get(i).getValue()));
+                contentStream.newLineAtOffset(0, -20);
+                contentStream.showText("Całość za towar: " + listaIloscRazyBrutto.get(i).getText());
             }
             contentStream.endText();
             contentStream.close();
