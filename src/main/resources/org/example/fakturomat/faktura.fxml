@@ -11,7 +11,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -32,7 +31,7 @@
         <RowConstraints maxHeight="56.0" minHeight="0.0" prefHeight="56.0" vgrow="NEVER" />
     </rowConstraints>
     <children>
-        <GridPane fx:id="glownyGrid" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="747.0" prefWidth="800.0" style="-fx-border-color: black; -fx-border-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <GridPane alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="747.0" prefWidth="800.0" style="-fx-border-color: black; -fx-border-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <columnConstraints>
                 <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="1.0" />
                 <ColumnConstraints hgrow="NEVER" minWidth="780.0" prefWidth="300.0" />
@@ -224,30 +223,22 @@
             <GridPane alignment="CENTER" minHeight="50.0" minWidth="50.0" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                 <!-- Towar -->
                 <columnConstraints>
-                    <ColumnConstraints hgrow="NEVER" maxWidth="415.0" minWidth="160.0" prefWidth="402.0" />
-                    <ColumnConstraints hgrow="NEVER" maxWidth="156.0" minWidth="52.0" prefWidth="68.0" />
-                    <ColumnConstraints hgrow="NEVER" maxWidth="156.0" minWidth="56.0" prefWidth="87.0" />
-                    <ColumnConstraints hgrow="NEVER" maxWidth="155.0" minWidth="94.0" prefWidth="113.0" />
-                    <ColumnConstraints hgrow="NEVER" maxWidth="153.0" minWidth="106.0" prefWidth="110.0" />
+                    <ColumnConstraints hgrow="NEVER" maxWidth="415.0" minWidth="160.0" prefWidth="316.0" />
+                    <ColumnConstraints hgrow="NEVER" maxWidth="156.0" minWidth="49.0" prefWidth="49.0" />
+                    <ColumnConstraints hgrow="NEVER" maxWidth="156.0" minWidth="56.0" prefWidth="84.0" />
+                    <ColumnConstraints hgrow="NEVER" maxWidth="155.0" minWidth="94.0" prefWidth="116.0" />
+                    <ColumnConstraints hgrow="NEVER" maxWidth="153.0" minWidth="59.0" prefWidth="62.0" />
+               <ColumnConstraints hgrow="NEVER" maxWidth="158.0" minWidth="74.0" prefWidth="156.0" />
                 </columnConstraints>
                 <rowConstraints>
                     <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="NEVER" />
                 </rowConstraints>
-                <AnchorPane>
-                    <Text layoutX="163.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa towaru" />
-                </AnchorPane>
-                <AnchorPane GridPane.columnIndex="1">
-                    <Text layoutX="23.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="j.m" wrappingWidth="25.705078125" />
-                </AnchorPane>
-                <AnchorPane GridPane.columnIndex="2">
-                    <Text layoutX="31.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ilość" wrappingWidth="25.705078125" />
-                </AnchorPane>
-                <AnchorPane GridPane.columnIndex="3">
-                    <Text layoutX="21.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cena netto" />
-                </AnchorPane>
-                <AnchorPane GridPane.columnIndex="4">
-                    <Text layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stawka VAT" />
-                </AnchorPane>
+                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa towaru" textAlignment="CENTER" wrappingWidth="317.41015625" />
+                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="j.m" textAlignment="CENTER" wrappingWidth="48.736328125" GridPane.columnIndex="1" />
+                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ilość" textAlignment="CENTER" wrappingWidth="82.705078125" GridPane.columnIndex="2" />
+                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cena netto" textAlignment="CENTER" wrappingWidth="113.119140625" GridPane.columnIndex="3" />
+                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Stawka VAT" GridPane.columnIndex="4" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Brutto cały towar" textAlignment="CENTER" wrappingWidth="153.369140625" GridPane.columnIndex="5" />
             </GridPane>
 
             <!-- ScrollPane dla obszaru dodawania towarów -->
@@ -255,7 +246,7 @@
                 <VBox fx:id="poziomyVBox" alignment="TOP_CENTER" layoutX="34.0" layoutY="607.0" prefHeight="61.0" prefWidth="618.0">
                     <HBox alignment="TOP_CENTER" minWidth="800.0" prefHeight="37.0" prefWidth="800.0" spacing="10">
 
-                        <TextField fx:id="nazwaTowaru" managed="false" prefHeight="26.0" prefWidth="395.0" />
+                        <TextField fx:id="nazwaTowaru" managed="false" prefHeight="26.0" prefWidth="305.0" />
 
                         <!-- Jednostka miary -->
                         <ComboBox fx:id="jednostkaMiary" managed="false" prefHeight="26.0" prefWidth="60.0">
@@ -267,9 +258,9 @@
                                 </FXCollections>
                             </items>
                         </ComboBox>
-                        <TextField fx:id="ilosc" managed="false" prefHeight="26.0" prefWidth="75.0" />
-                        <TextField fx:id="cenaNetto" managed="false" prefHeight="26.0" prefWidth="104.0" />
-                        <ComboBox fx:id="stawkaVAT" managed="false" prefHeight="26.0" prefWidth="86.0">
+                        <TextField fx:id="ilosc" managed="false" prefHeight="26.0" prefWidth="65.0" />
+                        <TextField fx:id="cenaNetto" managed="false" prefHeight="26.0" prefWidth="105.0" />
+                        <ComboBox fx:id="stawkaVAT" managed="false" prefHeight="26.0" prefWidth="80.0">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
                                     <String fx:value="np." />
@@ -281,6 +272,7 @@
                                 </FXCollections>
                             </items>
                         </ComboBox>
+                        <Label fx:id="iloscRazyBrutto" managed="false" prefHeight="26.0" prefWidth="75.0" />
                     </HBox>
                 </VBox>
             </ScrollPane>
@@ -306,7 +298,6 @@
                </HBox>
             </children>
          </VBox>
-
         </GridPane>
     </children>
 </GridPane>

@@ -57,6 +57,8 @@ public class Controller {
     private Label wyswietlaczPodatku;
     @FXML
     protected VBox podsumowanie;
+    @FXML
+    protected Label iloscRazyBrutto;
 
     private final List<TextField> listaNazwaTowaru = new ArrayList<>();
     private final List<ComboBox<String>> listaJednostkaMiary = new ArrayList<>();
@@ -64,7 +66,6 @@ public class Controller {
     private final List<TextField> listaCenaNetto = new ArrayList<>();
     private final List<ComboBox<String>> listaStawkaVAT = new ArrayList<>();
     private final Map<String, Double> cenyOrazVat = new HashMap<>();
-    private final Map<String, Double> iloscOrazCena = new HashMap<>();
     private static int pozycja = 0;
 
     // Sekwencyjny numer faktury
@@ -81,6 +82,7 @@ public class Controller {
         ChangeListener<Object> listener = (observable, oldValue, newValue) -> {
             dodawanieNettoDlaTejSamejStawki();
             kalkulujSume();
+            kalkulacjaIlosciTowaru();
         };
 
         cenaNettoField.textProperty().addListener(listener);
@@ -125,9 +127,14 @@ public class Controller {
         nowaStawkaVAT.setId("stawkaVAT_" + idLokalne);
         listaStawkaVAT.add(nowaStawkaVAT);
 
+        Label nowaIloscRazyCenaBrutto = new Label();
+        nowaIloscRazyCenaBrutto.setPrefHeight(iloscRazyBrutto.getPrefHeight());
+        nowaIloscRazyCenaBrutto.setPrefWidth(iloscRazyBrutto.getPrefWidth());
+        nowaIloscRazyCenaBrutto.setId("iloscRazyBrutto_" + idLokalne);
+
         HBox nowyPoziomyHBox = new HBox();
-        nowyPoziomyHBox.setSpacing(10.0);
-        nowyPoziomyHBox.getChildren().addAll(nowaNazwaTowaru, nowaJednostkaMiary, nowaIlosc, nowaCenaNetto, nowaStawkaVAT);
+        nowyPoziomyHBox.setSpacing(5.0);
+        nowyPoziomyHBox.getChildren().addAll(nowaNazwaTowaru, nowaJednostkaMiary, nowaIlosc, nowaCenaNetto, nowaStawkaVAT, nowaIloscRazyCenaBrutto);
 
         poziomyVBox.getChildren().add(nowyPoziomyHBox);
 
@@ -143,7 +150,38 @@ public class Controller {
     }
 
     protected void kalkulacjaIlosciTowaru() {
+        double sumaBrutto = 0.0;
 
+        for (int i = 0; i < listaNazwaTowaru.size(); i++) {
+
+            String cenaNettoStr = listaCenaNetto.get(i).getText();
+            ComboBox<String> stawkaVATCombo = listaStawkaVAT.get(i);
+            String stawkaVATStr = String.valueOf(stawkaVATCombo.getValue());
+            String iloscStr = listaIlosc.get(i).getText();
+
+            try {
+                double ilosc = Double.parseDouble(iloscStr);
+                double cenaNetto = Double.parseDouble(cenaNettoStr);
+                // Oblicz cenę brutto za sztukę
+                double stawkaVAT = Double.parseDouble(stawkaVATStr) / 100;
+                double cenaBrutto = cenaNetto * (1 + stawkaVAT);
+                // Oblicz koszt całkowity zakupu dla danej ilości towaru
+                double kosztCalkowity = ilosc * cenaBrutto;
+
+                // Aktualizuj sumę brutto
+                sumaBrutto += kosztCalkowity;
+
+                // Ustaw wartość ilosciRazyBrutto w odpowiednim Label
+                Label iloscRazyBruttoLabel = (Label) poziomyVBox.lookup("#iloscRazyBrutto_" + i);
+                iloscRazyBruttoLabel.setText(String.format("%.2f", kosztCalkowity));
+            }
+            catch(NumberFormatException e) {
+                System.err.println("Invalid input for method kalkulacjaIlosciTowaru");
+            }
+        }
+
+        // Aktualizuj etykietę sumy brutto dla wszystkich pozycji faktury
+        iloscRazyBrutto.setText(String.format("%.2f", sumaBrutto));
     }
 
     @FXML
@@ -202,21 +240,33 @@ public class Controller {
             double cenaNetto = entry.getValue();
             try {
                 double procentVAT = Double.parseDouble(stawkaVAT);
-                double podatek = cenaNetto * procentVAT / 100;
-                double cenaBrutto = cenaNetto * (1 + procentVAT / 100);
+                double podatek = 0.0;
 
-                sumaBrutto += cenaBrutto;
-                sumaNetto += cenaNetto;
+                for (int i = 0; i < listaNazwaTowaru.size(); i++) {
+                    String iloscStr = listaIlosc.get(i).getText();
+                    String cenaNettoStr = listaCenaNetto.get(i).getText();
+                    String stawkaVATStr = String.valueOf(listaStawkaVAT.get(i).getValue());
+
+                    if (!iloscStr.isEmpty() && !cenaNettoStr.isEmpty() && stawkaVATStr.equals(stawkaVAT)) {
+                        double ilosc = Double.parseDouble(iloscStr);
+                        double cenaNettoPerUnit = Double.parseDouble(cenaNettoStr);
+                        double cenaBruttoPerUnit = cenaNettoPerUnit * (1 + procentVAT / 100);
+                        double podatekPerUnit = cenaBruttoPerUnit - cenaNettoPerUnit;
+                        sumaBrutto += cenaBruttoPerUnit * ilosc;
+                        sumaNetto += cenaNettoPerUnit * ilosc;
+                        podatek += podatekPerUnit * ilosc;
+                    }
+                }
+
                 sumaPodatku += podatek;
-
-                wyswietlaniePodsumowania(stawkaVAT, cenaNetto, cenaBrutto);
+                wyswietlaniePodsumowania(stawkaVAT, sumaNetto, sumaBrutto);
             } catch (NumberFormatException e) {
                 System.err.println("Invalid input for stawkaVAT: " + stawkaVAT);
                 double cenaBrutto = cenaNetto;
                 sumaNetto = cenaNetto;
                 sumaBrutto += cenaBrutto;
 
-                wyswietlaniePodsumowania(stawkaVAT, cenaNetto, cenaBrutto);
+                wyswietlaniePodsumowania(stawkaVAT, sumaNetto, sumaBrutto);
             }
         }
 
