@@ -72,12 +72,12 @@ public class Controller {
 
     @FXML
     public void initialize() {
-        addListeners(cenaNetto, stawkaVAT, jednostkaMiary);
+        addListeners(cenaNetto, stawkaVAT, jednostkaMiary, ilosc);
         dataWystawienia.valueProperty().addListener((observable, oldValue, newValue) -> nadanieNumeruFaktury());
         nadanieNumeruFaktury();
     }
 
-    private void addListeners(TextField cenaNettoField, ComboBox<String> stawkaVATBox, ComboBox<String> jednostkaMiary) {
+    private void addListeners(TextField cenaNettoField, ComboBox<String> stawkaVATBox, ComboBox<String> jednostkaMiary, TextField ilosc) {
         ChangeListener<Object> listener = (observable, oldValue, newValue) -> {
             dodawanieNettoDlaTejSamejStawki();
             kalkulujSume();
@@ -86,6 +86,7 @@ public class Controller {
         cenaNettoField.textProperty().addListener(listener);
         stawkaVATBox.valueProperty().addListener(listener);
         jednostkaMiary.valueProperty().addListener(listener);
+        ilosc.textProperty().addListener(listener);
     }
 
     @FXML
@@ -130,7 +131,7 @@ public class Controller {
 
         poziomyVBox.getChildren().add(nowyPoziomyHBox);
 
-        addListeners(nowaCenaNetto, nowaStawkaVAT, nowaJednostkaMiary);
+        addListeners(nowaCenaNetto, nowaStawkaVAT, nowaJednostkaMiary, nowaIlosc);
         kalkulujSume();
     }
 
