@@ -64,6 +64,7 @@ public class Controller {
     private final List<TextField> listaCenaNetto = new ArrayList<>();
     private final List<ComboBox<String>> listaStawkaVAT = new ArrayList<>();
     private final Map<String, Double> cenyOrazVat = new HashMap<>();
+    private final Map<String, Double> iloscOrazCena = new HashMap<>();
     private static int pozycja = 0;
 
     // Sekwencyjny numer faktury
@@ -71,12 +72,12 @@ public class Controller {
 
     @FXML
     public void initialize() {
-        addListeners(cenaNetto, stawkaVAT);
+        addListeners(cenaNetto, stawkaVAT, jednostkaMiary);
         dataWystawienia.valueProperty().addListener((observable, oldValue, newValue) -> nadanieNumeruFaktury());
         nadanieNumeruFaktury();
     }
 
-    private void addListeners(TextField cenaNettoField, ComboBox<String> stawkaVATBox) {
+    private void addListeners(TextField cenaNettoField, ComboBox<String> stawkaVATBox, ComboBox<String> jednostkaMiary) {
         ChangeListener<Object> listener = (observable, oldValue, newValue) -> {
             dodawanieNettoDlaTejSamejStawki();
             kalkulujSume();
@@ -84,6 +85,7 @@ public class Controller {
 
         cenaNettoField.textProperty().addListener(listener);
         stawkaVATBox.valueProperty().addListener(listener);
+        jednostkaMiary.valueProperty().addListener(listener);
     }
 
     @FXML
@@ -128,7 +130,7 @@ public class Controller {
 
         poziomyVBox.getChildren().add(nowyPoziomyHBox);
 
-        addListeners(nowaCenaNetto, nowaStawkaVAT);
+        addListeners(nowaCenaNetto, nowaStawkaVAT, nowaJednostkaMiary);
         kalkulujSume();
     }
 
@@ -137,6 +139,10 @@ public class Controller {
         String cenaBruttoStr = String.valueOf(cenaBrutto);
         Label nowePodsumowanie = new Label("Stawka VAT: " + stawkaVATStr + ", Netto: " + cenaNettoStr + ", Brutto: " + cenaBruttoStr);
         podsumowanie.getChildren().add(nowePodsumowanie);
+    }
+
+    protected void kalkulacjaIlosciTowaru() {
+
     }
 
     @FXML
@@ -205,6 +211,11 @@ public class Controller {
                 wyswietlaniePodsumowania(stawkaVAT, cenaNetto, cenaBrutto);
             } catch (NumberFormatException e) {
                 System.err.println("Invalid input for stawkaVAT: " + stawkaVAT);
+                double cenaBrutto = cenaNetto;
+                sumaNetto = cenaNetto;
+                sumaBrutto += cenaBrutto;
+
+                wyswietlaniePodsumowania(stawkaVAT, cenaNetto, cenaBrutto);
             }
         }
 
