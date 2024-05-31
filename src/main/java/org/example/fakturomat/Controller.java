@@ -159,6 +159,10 @@ public class Controller {
             String stawkaVATStr = String.valueOf(stawkaVATCombo.getValue());
             String iloscStr = listaIlosc.get(i).getText();
 
+            if(stawkaVATStr.equals("np.") || stawkaVATStr.equals("zw.")) {
+                stawkaVATStr = "0";
+            }
+
             try {
                 double ilosc = Double.parseDouble(iloscStr);
                 double cenaNetto = Double.parseDouble(cenaNettoStr);
