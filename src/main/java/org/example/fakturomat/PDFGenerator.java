@@ -13,7 +13,7 @@ import java.util.List;
 
 public class PDFGenerator {
     public static void generatePDF(TextField numerFaktury, DatePicker dataWystawienia, DatePicker dataSprzedazy,
-                                   TextField nabywca, TextField nip, TextField ulica, TextField miasto,
+                                   TextField nabywca, TextField nip, TextField ulica, TextField miasto, TextField kodPocztowy,
                                    ComboBox<String> osobaWystawiajaca, TextField nazwaTowaru, ComboBox<String> jednostkaMiary,
                                    TextField ilosc, TextField cenaNetto, ComboBox<String> stawkaVAT,
                                    ComboBox<String> statusPlatnosci, DatePicker terminPlatnosci, ComboBox<String> sposobPlatnosci,
@@ -68,6 +68,8 @@ public class PDFGenerator {
             contentStream.showText("Ulica: " + ulica.getText());
             contentStream.newLineAtOffset(0, -20);
             contentStream.showText("Miasto: " + miasto.getText());
+            contentStream.newLineAtOffset(0, -20);
+            contentStream.showText("Kod pocztowy: " + kodPocztowy.getText());
             contentStream.newLineAtOffset(0, -20);
             contentStream.showText("Osoba wystawiająca: " + osobaWystawiajaca.getValue());
 

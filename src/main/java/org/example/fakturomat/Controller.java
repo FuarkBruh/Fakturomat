@@ -36,6 +36,8 @@ public class Controller {
     @FXML
     private TextField miasto;
     @FXML
+    private TextField kodPocztowy;
+    @FXML
     private ComboBox<String> osobaWystawiajaca;
     @FXML
     private TextField nazwaTowaru;
@@ -293,7 +295,7 @@ public class Controller {
     protected void onGenerujButtonClick() {
         //Trzeba potem dodać sprawdzenie czy wszystkie pola są wpisane, ale to potem, aby łatwiej testować
         PDFGenerator.generatePDF(
-                numerFaktury, dataWystawienia, dataSprzedazy, nabywca, nip, ulica, miasto, osobaWystawiajaca,
+                numerFaktury, dataWystawienia, dataSprzedazy, nabywca, nip, ulica, miasto, kodPocztowy, osobaWystawiajaca,
                 nazwaTowaru, jednostkaMiary, ilosc, cenaNetto, stawkaVAT, statusPlatnosci, terminPlatnosci,
                 sposobPlatnosci, uwagi, dataPlatnosci, listaNazwaTowaru,
                 listaIlosc, listaJednostkaMiary, listaCenaNetto, listaStawkaVAT, listaIloscRazyBrutto);
