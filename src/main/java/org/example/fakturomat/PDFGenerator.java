@@ -14,10 +14,8 @@ import java.util.List;
 public class PDFGenerator {
     public static void generatePDF(TextField numerFaktury, DatePicker dataWystawienia, DatePicker dataSprzedazy,
                                    TextField nabywca, TextField nip, TextField ulica, TextField miasto, TextField kodPocztowy,
-                                   ComboBox<String> osobaWystawiajaca, TextField nazwaTowaru, ComboBox<String> jednostkaMiary,
-                                   TextField ilosc, TextField cenaNetto, ComboBox<String> stawkaVAT,
-                                   ComboBox<String> statusPlatnosci, DatePicker terminPlatnosci, ComboBox<String> sposobPlatnosci,
-                                   TextField uwagi, DatePicker dataPlatnosci, List<TextField> listaNazwaTowaru, List<TextField> listaIlosc,
+                                   ComboBox<String> osobaWystawiajaca, DatePicker terminPlatnosci, ComboBox<String> sposobPlatnosci,
+                                   TextField uwagi, List<TextField> listaNazwaTowaru, List<TextField> listaIlosc,
                                    List<ComboBox<String>> listaJednostkaMiary, List<TextField> listaCenaNetto, List<ComboBox<String>> listaStawkaVAT, List<Label> listaIloscRazyBrutto) {
         try {
             PDDocument document = new PDDocument();
@@ -61,6 +59,10 @@ public class PDFGenerator {
             contentStream.newLineAtOffset(0, -20);
             contentStream.showText("Data sprzedaży: " + dataSprzedazy.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
             contentStream.newLineAtOffset(0, -20);
+            contentStream.showText("Płatne do: " + terminPlatnosci.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+            contentStream.newLineAtOffset(0, -20);
+            contentStream.showText("Sposób płatności: " + sposobPlatnosci.getValue());
+            contentStream.newLineAtOffset(0, -20);
             contentStream.showText("Nabywca: " + nabywca.getText());
             contentStream.newLineAtOffset(0, -20);
             contentStream.showText("NIP: " + nip.getText());
@@ -72,6 +74,8 @@ public class PDFGenerator {
             contentStream.showText("Kod pocztowy: " + kodPocztowy.getText());
             contentStream.newLineAtOffset(0, -20);
             contentStream.showText("Osoba wystawiająca: " + osobaWystawiajaca.getValue());
+            contentStream.newLineAtOffset(0, -20);
+            contentStream.showText("Uwagi: " + uwagi.getText());
 
             for (int i = 0; i < listaNazwaTowaru.size(); i++) {
                 contentStream.newLineAtOffset(0, -20);
