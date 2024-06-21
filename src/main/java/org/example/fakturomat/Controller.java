@@ -295,8 +295,8 @@ public class Controller {
     protected void onGenerujButtonClick() {
         //Trzeba potem dodać sprawdzenie czy wszystkie pola są wpisane, ale to potem, aby łatwiej testować
         PDFGenerator.generatePDF(
-                numerFaktury, dataWystawienia, dataSprzedazy, nabywca, nip, ulica, miasto, kodPocztowy, osobaWystawiajaca,
-                terminPlatnosci, sposobPlatnosci, uwagi, listaNazwaTowaru,
+                numerFaktury, dataWystawienia, dataSprzedazy, dataPlatnosci, nabywca, nip, ulica, miasto, kodPocztowy, osobaWystawiajaca,
+                statusPlatnosci, terminPlatnosci, sposobPlatnosci, uwagi, listaNazwaTowaru,
                 listaIlosc, listaJednostkaMiary, listaCenaNetto, listaStawkaVAT, listaIloscRazyBrutto);
     }
 }
